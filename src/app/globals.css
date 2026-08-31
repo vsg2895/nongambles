@@ -1,0 +1,177 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Nongambles — near-black ground with a lime accent. Fonts: Work Sans (body)
+   + DM Serif Display (display). Palette lifted from sites/Nongambles.html.
+
+   The TOKEN NAMES are identical to the sibling sites (cream/paper/ink/brand/…)
+   so every shared component works here unchanged — only the values differ.
+   That is the whole reason a component written for viglinksi renders correctly
+   on this site without a single conditional. */
+:root {
+  --background: #0e1317;
+  --foreground: #eaf2ec;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* `cream` is the BASE page surface and `paper` the raised panel above it.
+     Both are near-black here; the names are kept because a light value would
+     collide with `ink` (also light) and render text invisible on its own
+     background — the same trap the sibling dark theme documents. */
+  --color-cream: #0e1317;
+  --color-paper: #151c21;
+  /* Third surface, one step above `paper` — the offer tiles and inline chips
+     in the design sit on it. */
+  --color-surface: #1d262c;
+
+  --color-ink: #eaf2ec;
+  --color-ink-soft: #cbd8cf;
+  --color-muted: #93a3a9;
+  --color-faint: #64757d;
+
+  /* Lime accent. `brand-ink` is the text colour that goes ON the accent —
+     near-black, because white on #C9F24D fails contrast badly. */
+  --color-brand: #c9f24d;
+  --color-brand-dark: #a6ce33;
+  --color-brand-soft: #d8f77a;
+  --color-brand-ink: #10160a;
+
+  --color-line: #27333a;
+  --color-line-soft: #36454e;
+
+  --color-gold: #e9e3c9;
+  --color-win: #9ede7a;
+  --color-win-bg: #1a2417;
+
+  /* The sibling sites expose an `accent` used for links and highlights. Here it
+     is the same lime — this design has one accent, not two. */
+  --color-accent: #c9f24d;
+  --color-accent-soft: #d8f77a;
+
+  --font-sans: var(--font-work-sans);
+  --font-display: var(--font-dm-serif);
+  --font-mono: var(--font-geist-mono);
+
+  --radius-ng: 16px;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-work-sans), system-ui, Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  font-family: var(--font-dm-serif), Georgia, serif;
+  font-weight: 400;
+}
+
+/* ── Design vocabulary from sites/Nongambles.html ───────────────────────────
+   Kept as named component classes rather than repeated utility strings: each
+   appears on dozens of elements, and the hover/focus states below cannot be
+   expressed inline. */
+
+.card {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-ng);
+}
+.card:hover {
+  border-color: var(--color-line-soft);
+}
+
+.btn-primary {
+  background: var(--color-brand);
+  color: var(--color-brand-ink);
+  box-shadow: 0 8px 28px -10px rgba(201, 242, 77, 0.55);
+}
+.btn-primary:hover {
+  background: var(--color-brand-dark);
+}
+
+.btn-ghost {
+  border: 1px solid var(--color-line);
+  color: var(--color-ink);
+}
+.btn-ghost:hover {
+  border-color: var(--color-brand);
+  color: var(--color-brand);
+}
+
+/* Category chip. `pill-active` is the selected state. */
+.pill {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  color: var(--color-muted);
+}
+.pill:hover {
+  border-color: var(--color-line-soft);
+  color: var(--color-ink);
+}
+.pill-active {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: var(--color-brand-ink);
+}
+
+/* Square logo tile behind a casino's mark. */
+.tile {
+  border-radius: 12px;
+  background: linear-gradient(150deg, #22303a, #141c21);
+  border: 1px solid var(--color-line);
+}
+
+/* Hero ground: a lime bloom fading into the page colour. */
+.hero-wash {
+  background:
+    radial-gradient(60% 70% at 50% -10%, rgba(201, 242, 77, 0.1) 0%, rgba(201, 242, 77, 0) 62%),
+    linear-gradient(180deg, #0e1317 0%, #111a1c 55%, #0e1317 100%);
+}
+
+/* Faint graph paper over the hero. Decorative only — always aria-hidden and
+   pointer-events:none at the call site. */
+.grid-wash {
+  background-image:
+    linear-gradient(var(--color-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.22;
+}
+
+/* ── Responsive safety net (all phones / tablets / laptops / large screens) ── */
+html {
+  -webkit-text-size-adjust: 100%; /* no iOS text auto-inflation on rotate */
+}
+body {
+  overflow-x: clip; /* never scroll the page sideways; safe with the sticky header */
+}
+
+/* Hide the scrollbar on horizontally-scrollable rows (e.g. the mobile nav). */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Scraped HTML content (casino / offer descriptions) must stay in its column
+   on small screens: wrap long words, cap media width, scroll wide tables. */
+.prose {
+  overflow-wrap: break-word;
+}
+.prose :where(img, video, iframe) {
+  max-width: 100%;
+  height: auto;
+}
+.prose :where(table) {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+}
+.prose :where(pre) {
+  overflow-x: auto;
+}
