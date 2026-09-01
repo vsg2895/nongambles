@@ -109,7 +109,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#0e1317',
+  themeColor: '#0c1518',
 }
 
 const NAV_LINKS = [
@@ -124,11 +124,11 @@ function SealMark() {
     <span
       aria-hidden
       className="grid h-9 w-9 place-items-center rounded-full"
-      style={{ background: 'linear-gradient(150deg,#22303a,#141c21)' }}
+      style={{ background: 'linear-gradient(150deg,#1e3437,#101c1e)' }}
     >
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" role="presentation">
-        <circle cx="12" cy="12" r="9" stroke="#c9f24d" strokeWidth="1.6" />
-        <path d="M8.6 15.4L15.4 8.6" stroke="#c9f24d" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="12" cy="12" r="9" stroke="#4fd9c4" strokeWidth="1.6" />
+        <path d="M8.6 15.4L15.4 8.6" stroke="#4fd9c4" strokeWidth="2" strokeLinecap="round" />
       </svg>
     </span>
   )

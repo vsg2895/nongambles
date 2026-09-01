@@ -1,55 +1,63 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Nongambles — near-black ground with a lime accent. Fonts: Work Sans (body)
-   + DM Serif Display (display). Palette lifted from sites/Nongambles.html.
+/* Nongambles — deep teal-graphite ground with a teal accent. Fonts: Work Sans
+   (body) + DM Serif Display (display). Palette from sites/Nongambles.html.
+
+   The surfaces carry a deliberate TEAL cast rather than the neutral near-black
+   they started as. Neutral black read as the same ground as the plum sibling
+   site at a glance — same lightness (L* 9.7 vs 9.3), and nothing but the accent
+   colour told them apart. The tinted ground is what separates the two sites,
+   and it is tuned to the teal accent so ground and brand share one hue family
+   rather than the ground being left on the earlier lime tuning.
 
    The TOKEN NAMES are identical to the sibling sites (cream/paper/ink/brand/…)
    so every shared component works here unchanged — only the values differ.
    That is the whole reason a component written for viglinksi renders correctly
    on this site without a single conditional. */
 :root {
-  --background: #0e1317;
-  --foreground: #eaf2ec;
+  --background: #0c1518;
+  --foreground: #e9f3ec;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* `cream` is the BASE page surface and `paper` the raised panel above it.
-     Both are near-black here; the names are kept because a light value would
-     collide with `ink` (also light) and render text invisible on its own
-     background — the same trap the sibling dark theme documents. */
-  --color-cream: #0e1317;
-  --color-paper: #151c21;
+  /* `cream` is the BASE page surface and `paper` the raised panel above it
+     (the footer and every card sit on `paper`). Both are dark teal-graphite
+     here; the names are kept because a light value would collide with `ink`
+     (also light) and render text invisible on its own background — the same
+     trap the sibling dark theme documents. */
+  --color-cream: #0c1518;
+  --color-paper: #111d20;
   /* Third surface, one step above `paper` — the offer tiles and inline chips
      in the design sit on it. */
-  --color-surface: #1d262c;
+  --color-surface: #182729;
 
-  --color-ink: #eaf2ec;
-  --color-ink-soft: #cbd8cf;
-  --color-muted: #93a3a9;
-  --color-faint: #64757d;
+  --color-ink: #e9f3ec;
+  --color-ink-soft: #ccdad1;
+  --color-muted: #96a89c;
+  --color-faint: #6b7f73;
 
-  /* Lime accent. `brand-ink` is the text colour that goes ON the accent —
-     near-black, because white on #C9F24D fails contrast badly. */
-  --color-brand: #c9f24d;
-  --color-brand-dark: #a6ce33;
-  --color-brand-soft: #d8f77a;
-  --color-brand-ink: #10160a;
+  /* Teal accent. `brand-ink` is the text colour that goes ON the accent —
+     near-black, because white on #4FD9C4 fails contrast badly. */
+  --color-brand: #4fd9c4;
+  --color-brand-dark: #3bc8c2;
+  --color-brand-soft: #76f1c1;
+  --color-brand-ink: #04140f;
 
-  --color-line: #27333a;
-  --color-line-soft: #36454e;
+  --color-line: #22383a;
+  --color-line-soft: #2e4d50;
 
   --color-gold: #e9e3c9;
-  --color-win: #9ede7a;
-  --color-win-bg: #1a2417;
+  --color-win: #76f1c1;
+  --color-win-bg: #0f2b26;
 
   /* The sibling sites expose an `accent` used for links and highlights. Here it
-     is the same lime — this design has one accent, not two. */
-  --color-accent: #c9f24d;
-  --color-accent-soft: #d8f77a;
+     is the same teal — this design has one accent, not two. */
+  --color-accent: #4fd9c4;
+  --color-accent-soft: #76f1c1;
 
   --font-sans: var(--font-work-sans);
   --font-display: var(--font-dm-serif);
@@ -87,7 +95,7 @@ body {
 .btn-primary {
   background: var(--color-brand);
   color: var(--color-brand-ink);
-  box-shadow: 0 8px 28px -10px rgba(201, 242, 77, 0.55);
+  box-shadow: 0 8px 28px -10px rgba(79, 217, 196, 0.55);
 }
 .btn-primary:hover {
   background: var(--color-brand-dark);
@@ -121,25 +129,15 @@ body {
 /* Square logo tile behind a casino's mark. */
 .tile {
   border-radius: 12px;
-  background: linear-gradient(150deg, #22303a, #141c21);
+  background: linear-gradient(150deg, #1e3437, #101c1e);
   border: 1px solid var(--color-line);
 }
 
-/* Hero ground: a lime bloom fading into the page colour. */
+/* Hero ground: a teal bloom fading into the page colour. */
 .hero-wash {
   background:
-    radial-gradient(60% 70% at 50% -10%, rgba(201, 242, 77, 0.1) 0%, rgba(201, 242, 77, 0) 62%),
-    linear-gradient(180deg, #0e1317 0%, #111a1c 55%, #0e1317 100%);
-}
-
-/* Faint graph paper over the hero. Decorative only — always aria-hidden and
-   pointer-events:none at the call site. */
-.grid-wash {
-  background-image:
-    linear-gradient(var(--color-line) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-line) 1px, transparent 1px);
-  background-size: 72px 72px;
-  opacity: 0.22;
+    radial-gradient(60% 70% at 50% -10%, rgba(79, 217, 196, 0.1) 0%, rgba(79, 217, 196, 0) 62%),
+    linear-gradient(180deg, #0c1518 0%, #101d20 55%, #0c1518 100%);
 }
 
 /* ── Responsive safety net (all phones / tablets / laptops / large screens) ── */

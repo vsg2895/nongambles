@@ -28,15 +28,15 @@ export default function OpenGraphImage() {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #0e1317 0%, #16211c 55%, #1d2b1a 100%)',
-          color: '#eaf2ec',
+          background: 'linear-gradient(135deg, #0c1518 0%, #14282a 55%, #17302f 100%)',
+          color: '#e9f3ec',
           fontFamily: 'sans-serif',
         }}
       >
         <div style={{ fontSize: 40, letterSpacing: 10, opacity: 0.85, textTransform: 'uppercase' }}>
           Wagering Math, Not Hype
         </div>
-        <div style={{ fontSize: 104, fontWeight: 700, marginTop: 24, textAlign: 'center', padding: '0 60px', color: '#c9f24d' }}>
+        <div style={{ fontSize: 104, fontWeight: 700, marginTop: 24, textAlign: 'center', padding: '0 60px', color: '#4fd9c4' }}>
           Nongambles
         </div>
         <div style={{ fontSize: 34, marginTop: 32, opacity: 0.8 }}>

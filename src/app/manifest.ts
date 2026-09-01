@@ -17,8 +17,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: `${SITE_NAME} — independent online casino reviews, bonuses and offers.`,
     start_url: '/',
     display: 'browser',
-    background_color: '#0e1317',
-    theme_color: '#c9f24d',
+    background_color: '#0c1518',
+    theme_color: '#4fd9c4',
     icons: [
       { src: '/icon.svg', sizes: 'any', type: 'image/svg+xml' },
       { src: '/apple-icon', sizes: '180x180', type: 'image/png' },

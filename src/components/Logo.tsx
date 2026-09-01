@@ -1,7 +1,7 @@
 import Link from 'next/link'
 
 /**
- * Nongambles brand logo: a lime "×" mark — the offers that do NOT survive the
+ * Nongambles brand logo: a teal "×" mark — the offers that do NOT survive the
  * math — beside the wordmark, taken from the design in sites/Nongambles.html.
  *
  * Same component contract as the sibling sites: one optional `className`, the
@@ -19,12 +19,12 @@ export default function Logo({ className = '' }: { className?: string }) {
       <span
         aria-hidden="true"
         className="grid h-10 w-10 shrink-0 place-items-center rounded-xl border border-line"
-        style={{ background: 'linear-gradient(150deg,#22303a,#141c21)' }}
+        style={{ background: 'linear-gradient(150deg,#1e3437,#101c1e)' }}
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" role="presentation">
           {/* Struck-through circle: an offer that did not clear the bar. */}
-          <circle cx="12" cy="12" r="8.4" stroke="#c9f24d" strokeWidth="1.7" />
-          <path d="M8.4 15.6L15.6 8.4" stroke="#c9f24d" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="12" cy="12" r="8.4" stroke="#4fd9c4" strokeWidth="1.7" />
+          <path d="M8.4 15.6L15.6 8.4" stroke="#4fd9c4" strokeWidth="2" strokeLinecap="round" />
         </svg>
       </span>
 

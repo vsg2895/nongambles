@@ -19,7 +19,7 @@ export const metadata: Metadata = {
  * Both figures matter: the heading is large text, but the `text-white/80`
  * subtitle is small and needs the full 4.5:1.
  */
-const ACCENT = '#0e1317'
+const ACCENT = '#0c1518'
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? 'our newsletter'
 
 type Props = {

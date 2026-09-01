@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 /**
  * Accent panel for this page — THIS site's brand colour, not a shared default.
  */
-const ACCENT = '#0e1317'
+const ACCENT = '#0c1518'
 const SITE_NAME = process.env.NEXT_PUBLIC_SITE_NAME ?? 'our newsletter'
 
 // Focus ring shared by both links, so the page stays keyboard-navigable, and

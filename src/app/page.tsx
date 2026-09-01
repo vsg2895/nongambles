@@ -102,10 +102,6 @@ export default async function HomePage({ searchParams }: Props) {
       <main>
         {/* Hero */}
         <section className="hero-wash relative overflow-hidden px-4 pt-20 pb-24 lg:pt-28 lg:pb-32">
-          {/* Graph-paper wash from the design. Decorative only: aria-hidden and
-              pointer-events-none so it never intercepts a tap or reaches AT. */}
-          <div className="grid-wash pointer-events-none absolute inset-0" aria-hidden="true" />
-
           <div className="container relative mx-auto max-w-4xl text-center">
             <p className="inline-block rounded-full border border-brand/45 px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-brand">
               {COPY.home.heroEyebrow}
