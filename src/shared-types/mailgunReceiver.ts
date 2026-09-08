@@ -13,16 +13,6 @@ export interface MailgunReceiver {
   email: string
   name: string | null
   source: MailgunReceiverSource
-  /**
-   * WHERE this address came from, recorded at import or entry.
-   *
-   * RESTORED to match the code that is actually deployable. The removal of this
-   * field lives in the two uncommitted stashes (backend + admin) together with
-   * the migration that drops the column; until those are popped, the committed
-   * admin screen reads it and the committed API returns it, so the type has to
-   * agree with them. Re-remove it when the stashes land.
-   */
-  consent_source: string | null
   /** When the row was added. Set on every creation path. */
   consent_recorded_at: string | null
   is_active: boolean
@@ -37,8 +27,6 @@ export interface MailgunReceiver {
 export interface UpsertMailgunReceiverPayload {
   email: string
   name?: string | null
-  /** Required by the committed API on both create and update — see above. */
-  consent_source: string
 }
 
 /** Progress row for a queued spreadsheet import, polled until finished_at. */
