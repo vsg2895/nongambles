@@ -138,4 +138,25 @@ export const COPY = {
     notFound: 'Nothing at this address. The offer may have expired and been removed.',
     apiError: 'This did not load. Please try again shortly.',
   },
+  reviews: {
+    heading: 'Player Reviews',
+    empty: 'No reviews yet \u2014 be the first to share your experience.',
+    formTitle: 'Write A Review',
+    formIntro: 'Your review appears on this page as soon as you post it.',
+    nameLabel: 'Your name',
+    emailLabel: 'Email (optional, never published)',
+    ratingLabel: 'Rating',
+    titleLabel: 'Headline (optional)',
+    bodyLabel: 'Your review',
+    bodyPlaceholder: 'What was your experience \u2014 payouts, support, verification?',
+    submit: 'Submit Review',
+    // Two outcomes, because the site can run pre- or post-moderation
+    // (Sites -> Publish reviews immediately). The API reports which one
+    // applied; promising the wrong one is a promise the page then breaks.
+    success: 'Thanks \u2014 your review is now live. Scroll up to see it.',
+    successPending: 'Thanks \u2014 your review has been submitted and will appear once approved.',
+    error: 'That did not send. Please check the form and try again.',
+    ratingSummary: (avg: number, total: number) =>
+      `${avg.toFixed(1)} out of 5 from ${total} ${total === 1 ? 'review' : 'reviews'}`,
+  },
 } as const
