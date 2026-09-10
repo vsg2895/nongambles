@@ -32,7 +32,7 @@ export default function Logo({ className = '' }: { className?: string }) {
         <span className="font-display text-[22px] tracking-tight text-ink">
           Non<span className="text-brand">gambles</span>
         </span>
-        <span className="mt-1 text-[9px] font-semibold uppercase tracking-[0.22em] text-faint">
+        <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
           Wagering Math
         </span>
       </span>
