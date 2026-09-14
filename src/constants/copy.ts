@@ -111,7 +111,24 @@ export const COPY = {
     subtitle: 'One email when an offer\u2019s playthrough or cap changes — and when a new one clears the bar.',
     placeholder: 'Email for the bonus breakdowns',
     button: 'Subscribe',
-    success: 'Nearly there — confirm the link in your inbox to get the bonus breakdowns.',
+    // Shown while the address is being checked. The subscribe request now
+    // waits on a live address-validation call, so the button has to say so
+    // rather than just dimming for a second or two.
+    checking: 'Checking…',
+        // The spam line is NOT optional wording. This is a double opt-in list: an
+    // unconfirmed subscriber never receives anything again, and the verify mail
+    // is the single most likely message to be filtered — new sender, one link,
+    // no history. Telling people where to look is the difference between a
+    // signup and a dead row.
+    success:
+      'Nearly there — confirm the link in your inbox to get the bonus breakdowns. '
+      + 'If you cannot see it, check spam or junk.',
+    // Shown when the API reports email_sent=false — the site is still
+    // collecting addresses but its sending is switched off in the admin.
+    // Promising an inbox (and a spam folder to search) for mail that will
+    // never arrive is worse than not collecting the address at all.
+    successNoEmail:
+      "You're on the list. No confirmation email goes out from this site at the moment.",
     error: 'That did not submit. Give it another go.',
   },
   footer: {
@@ -130,7 +147,7 @@ export const COPY = {
     // address in the footer is what mailbox providers and the gambling
     // affiliate compliance checks both look for, and it must match the address
     // used in the email templates.
-    postalAddress: '10 Downing Street, London SW1A 2AA, United Kingdom',
+    postalAddress: '25 Baker Street, London W1U 8ED, United Kingdom',
     disclaimer:
       'Gambling carries real financial risk and is for adults aged 18 and over only. No bonus has a positive expected value once the playthrough is priced in — treat every offer as paid entertainment, never as income. Some links here earn us a commission; it plays no part in the maths we publish.',
   },
