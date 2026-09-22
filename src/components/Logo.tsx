@@ -14,7 +14,7 @@ export default function Logo({ className = '' }: { className?: string }) {
     <Link
       href="/"
       aria-label="Nongambles home"
-      className={`inline-flex shrink-0 items-center gap-3 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${className}`.trim()}
+      className={`inline-flex min-h-11 shrink-0 items-center gap-3 rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-brand focus-visible:ring-offset-2 focus-visible:ring-offset-cream ${className}`.trim()}
     >
       <span
         aria-hidden="true"
@@ -32,7 +32,7 @@ export default function Logo({ className = '' }: { className?: string }) {
         <span className="font-display text-[22px] tracking-tight text-ink">
           Non<span className="text-brand">gambles</span>
         </span>
-        <span className="mt-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-faint">
+        <span className="mt-1 text-xs font-semibold uppercase tracking-[0.12em] text-faint">
           Wagering Math
         </span>
       </span>
