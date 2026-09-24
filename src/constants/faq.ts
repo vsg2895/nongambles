@@ -35,11 +35,6 @@ export const FAQ_ITEMS = [
       'Occasionally — usually low-multiplier cash offers with no cashout cap and full weighting on a low-edge game. They are uncommon and short-lived. When we find one we say so explicitly, and when the maths is negative we say that too rather than calling it a "great offer".',
   },
   {
-    question: 'Do you get paid by the casinos you cost out?',
-    answer:
-      'We may earn a commission when someone signs up through a link here. It cannot change an arithmetic result: the expected value of an offer is a calculation, we show the inputs, and an offer that prices badly stays published with its bad price.',
-  },
-  {
     question: 'How often are the numbers rechecked?',
     answer:
       'Whenever an operator changes its terms, and periodically regardless. Wagering multipliers, weighting tables and cashout caps are the terms most often revised quietly, so a recalculated offer carries a fresh revision date in the page structured data.',

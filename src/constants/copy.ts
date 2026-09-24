@@ -149,7 +149,7 @@ export const COPY = {
     // used in the email templates.
     postalAddress: '25 Baker Street, London W1U 8ED, United Kingdom',
     disclaimer:
-      'Gambling carries real financial risk and is for adults aged 18 and over only. No bonus has a positive expected value once the playthrough is priced in — treat every offer as paid entertainment, never as income. Some links here earn us a commission; it plays no part in the maths we publish.',
+      'Gambling carries real financial risk and is for adults aged 18 and over only. No bonus has a positive expected value once the playthrough is priced in — treat every offer as paid entertainment, never as income.',
   },
   errors: {
     notFound: 'Nothing at this address. The offer may have expired and been removed.',
