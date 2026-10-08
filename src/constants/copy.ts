@@ -49,14 +49,14 @@ export const COPY = {
     heroHighlight: 'claiming. We show which are.',
     heroSubtitle:
       'We convert every welcome offer into what it actually returns after playthrough, game weighting and the cashout cap — then say plainly whether to skip it.',
-    topCasinosTitle: 'Offers that survive the math',
+    topCasinosTitle: 'Offers That Survive The Math',
     topCasinosSubtitle: 'Ranked by real return after playthrough, then payout speed. Filter by category.',
     featuredCasinos: 'Open The Offer List',
     specialOffers: 'Offers Worth Claiming',
     viewAll: 'View All',
     // Leads the home <title>; the year and brand are appended in page.tsx.
     homeTitle: 'Bonus Math Before You Claim',
-    faqTitle: 'How the scoring works',
+    faqTitle: 'How The Scoring Works',
     metaDescription:
       'Every welcome offer converted into what it actually returns after playthrough, game weighting and the cashout cap — with the ones to skip named outright.',
   },
@@ -88,7 +88,7 @@ export const COPY = {
     noResults: 'No offer clears the math with those filters applied.',
   },
   specialOffers: {
-    pageTitle: 'Offers That Clear the Bar',
+    pageTitle: 'Offers That Clear The Bar',
     pageDescription:
       'Bonuses whose maths survives contact with the terms. Playthrough, weighting and cap stated before you claim, not after.',
     // Appended to an offer's (shared) bonus text so the four sites do not ship
@@ -107,7 +107,7 @@ export const COPY = {
     noResults: 'No offer in this category has been costed yet.',
   },
   newsletter: {
-    title: "When terms get worse, you'll know",
+    title: "When Terms Get Worse, You'll Know",
     subtitle: 'One email when an offer\u2019s playthrough or cap changes — and when a new one clears the bar.',
     placeholder: 'Email for the bonus breakdowns',
     button: 'Subscribe',
