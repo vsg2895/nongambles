@@ -54,7 +54,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     //
     // A CMS page that is NOT one of the eleven is bespoke editorial for this
     // site, so it indexes normally.
-    robots: LEGAL_PAGES.some((p) => p.slug === slug)
+    /*
+     * FROM THE API, not from a list in this file.
+     *
+     * This used to be `LEGAL_PAGES.some(…)`, which suppressed all ELEVEN
+     * standard pages. Six of them deserve it — privacy policy, terms, cookie
+     * policy, disclaimer, AML and KYC are generated from one template for every
+     * site in the network, so indexing them would put eight near-identical
+     * copies into the index competing with each other.
+     *
+     * The other five do not. /about, /contact, /responsible-gambling,
+     * /affiliate-disclosure and /editorial-policy are the pages Google's
+     * quality guidance looks for on a gambling affiliate — who runs this site,
+     * how it is funded, how operators are assessed — and Search Console was
+     * reporting them as "Excluded by noindex". Suppressing them hid the trust
+     * signals the whole domain is judged on.
+     *
+     * So the decision lives in `cms_pages.noindex`, per page and per site: the
+     * six legal pages ship true, the five trust pages ship false, and an editor
+     * can flip either without a deploy. `follow` stays TRUE on a noindexed
+     * page, so it still passes authority through its internal links.
+     *
+     * A page the API does not flag indexes normally — bespoke editorial for
+     * this site is exactly what should be in the index.
+     */
+    robots: page.noindex
       ? { index: false, follow: true }
       : { index: true, follow: true },
   }
