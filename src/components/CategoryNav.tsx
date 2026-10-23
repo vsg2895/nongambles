@@ -14,7 +14,26 @@ export default function CategoryNav({
   selected: string
 }) {
   return (
-    <nav aria-label="Casino categories" className="flex flex-wrap gap-3">
+    /*
+     * ONE FULL-WIDTH COLUMN ON A PHONE, a content-sized wrapping row from
+     * 640px up.
+     *
+     * Content sizing is right on a desktop, where the chips sit in one row and
+     * their differing widths read as differing words. On a phone the same rule
+     * produced a ragged stack — chips measured 156–187px wide, so some rows
+     * held two and some held one and no two edges lined up, which reads as
+     * unrelated buttons rather than one set of filters.
+     *
+     * Two equal columns do not fit: the widest chip needs ~187px and a
+     * half-width track at 390px is ~166px, so a nowrap label would be pushed
+     * out of its own chip. One column is the honest answer — every chip
+     * identical, nothing clipped, and it matches the bonus-type block above it,
+     * which is already a single column at this width.
+     *
+     * A plain block comment, not `{/* … *\/}`: a JSX expression container
+     * cannot sit where the returned element goes.
+     */
+      <nav aria-label="Casino categories" className="grid grid-cols-1 gap-3 sm:flex sm:flex-wrap">
       {categories.map((c) => {
         const active = c.slug === selected
         return (
@@ -41,7 +60,7 @@ export default function CategoryNav({
             aria-current={active ? 'page' : undefined}
             // `.pill` / `.pill-active` carry the colours and the hover state,
             // which cannot be expressed inline. min-h-11 keeps a 44px tap target.
-            className={`pill flex min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors ${
+            className={`pill flex w-full justify-center sm:flex sm:w-auto sm:justify-start min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors ${
               active ? 'pill-active font-semibold' : 'font-medium'
             }`}
           >
