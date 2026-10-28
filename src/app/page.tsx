@@ -126,15 +126,15 @@ export default async function HomePage({ searchParams }: Props) {
 
       <main>
         {/* Hero */}
-        <section className="hero-wash relative overflow-hidden px-4 pt-20 pb-24 lg:pt-28 lg:pb-32">
+        <section className="hero-wash relative overflow-hidden px-4 pt-10 pb-10 sm:pt-20 sm:pb-24 lg:pt-28 lg:pb-32">
           <div className="container relative mx-auto max-w-4xl text-center">
-            <p className="inline-block rounded-full border border-brand/45 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-brand">
+            <p className="inline-block rounded-full border border-brand/45 px-3 py-1 text-[10px] font-semibold sm:px-4 sm:py-1.5 sm:text-xs uppercase tracking-[0.18em] text-brand">
               {COPY.home.heroEyebrow}
             </p>
             {/* text-wrap:balance keeps the two-line headline from leaving one
                 orphan word on the second line at intermediate widths. */}
             <h1
-              className="font-display mt-7 text-[38px] leading-[1.06] tracking-[-0.01em] text-ink sm:text-[52px] lg:text-[66px]"
+              className="font-display mt-4 text-[30px] sm:mt-7 leading-[1.06] tracking-[-0.01em] text-ink sm:text-[52px] lg:text-[66px]"
               style={{ textWrap: 'balance' }}
             >
               {COPY.home.heroHeadline}{' '}
@@ -142,22 +142,22 @@ export default async function HomePage({ searchParams }: Props) {
               <em className="not-italic text-brand">{COPY.home.heroHighlight}</em>
             </h1>
             <p
-              className="mx-auto mt-6 max-w-[560px] text-base leading-relaxed text-muted lg:text-[17px]"
+              className="mx-auto mt-4 max-w-[560px] text-[15px] sm:mt-6 sm:text-base leading-relaxed text-muted lg:text-[17px]"
               style={{ textWrap: 'pretty' }}
             >
               {COPY.home.heroSubtitle}
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-6 flex flex-col justify-center gap-2.5 sm:mt-9 sm:gap-3 sm:flex-row sm:items-center">
               <Link
                 href="/casinos"
-                className="btn-primary flex min-h-11 w-full items-center justify-center rounded-full px-7 py-3.5 text-[15px] font-semibold sm:w-auto"
+                className="btn-primary flex min-h-[3.25rem] w-full sm:w-auto whitespace-nowrap items-center justify-center rounded-full px-6 py-3.5 text-base font-semibold sm:flex-none sm:px-7 sm:py-3.5"
               >
                 {COPY.home.featuredCasinos}
               </Link>
               {anyOffersVisible && (
                 <Link
                   href="/special-offers"
-                  className="btn-ghost flex min-h-11 w-full items-center justify-center rounded-full px-7 py-3.5 text-[15px] font-semibold sm:w-auto"
+                  className="btn-ghost flex min-h-[3.25rem] w-full sm:w-auto whitespace-nowrap items-center justify-center rounded-full px-6 py-[13px] text-base font-semibold sm:flex-none sm:px-7 sm:py-[13px]"
                 >
                   {COPY.home.specialOffers}
                 </Link>
@@ -167,12 +167,45 @@ export default async function HomePage({ searchParams }: Props) {
           </div>
         </section>
 
-        {/* Bonus types — the first thing under the hero.
+        {/* Casinos by category */}
+        <section className="px-4 py-8 sm:py-14" aria-labelledby="top-casinos-heading">
+          <div className="container mx-auto max-w-6xl">
+            <div className="mb-4 flex items-end justify-between gap-4 sm:mb-8">
+              <div>
+                <h2 id="top-casinos-heading" className="font-display text-2xl font-semibold text-ink sm:text-4xl">{COPY.home.topCasinosTitle}</h2>
+                <p className="mt-1 text-sm text-muted sm:mt-2 sm:text-base">{COPY.home.topCasinosSubtitle}</p>
+              </div>
+              {selected && (
+                <Link href={`/categories/${selected}`} className="inline-block -mx-1 px-1 py-3 -my-3 text-sm font-bold text-brand hover:text-brand-dark whitespace-nowrap">{COPY.home.viewAll} →</Link>
+              )}
+            </div>
 
-            Placed here rather than above it on purpose: the h1 has to stay the
-            top of the document for a reader and for a crawler alike, and a row
-            of filters above the page's own name reads as a second site header.
-            Directly beneath it, this is the first thing a visitor can act on.
+            {categories.length > 0 && selected && (
+              <div className="mb-5 sm:mb-8"><CategoryNav categories={categories} selected={selected} /></div>
+            )}
+
+            {casinos.length === 0 ? (
+              <p className="text-muted">{COPY.casinos.noResults}</p>
+            ) : (
+              <ol className="flex flex-col gap-5">
+                {casinos.map((casino, i) => <CasinoCard key={casino.id} casino={casino} rank={i + 1} />)}
+              </ol>
+            )}
+
+            {activeCategory && hasMoreCasinos && (
+              <div className="mt-9 text-center">
+                <Link href={`/categories/${selected}`} aria-label={`See all ${activeCategory.name} casinos`} className="inline-flex rounded-full border border-line-soft bg-paper px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand">
+                  See More →
+                </Link>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Bonus types — directly under the casino list.
+
+            The casinos are what visitors came for, so they come first under
+            the hero; the bonus-type chips follow as the next way in.
 
             Renders nothing when the site does not publish the Bonus area, so
             the band collapses rather than leaving a gap. */}
@@ -221,41 +254,6 @@ export default async function HomePage({ searchParams }: Props) {
             </div>
           </section>
         )}
-
-        {/* Casinos by category */}
-        <section className="px-4 py-14" aria-labelledby="top-casinos-heading">
-          <div className="container mx-auto max-w-6xl">
-            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2 id="top-casinos-heading" className="font-display text-3xl font-semibold text-ink sm:text-4xl">{COPY.home.topCasinosTitle}</h2>
-                <p className="mt-2 text-muted">{COPY.home.topCasinosSubtitle}</p>
-              </div>
-              {selected && (
-                <Link href={`/categories/${selected}`} className="inline-block -mx-1 px-1 py-3 -my-3 text-sm font-bold text-brand hover:text-brand-dark whitespace-nowrap">{COPY.home.viewAll} →</Link>
-              )}
-            </div>
-
-            {categories.length > 0 && selected && (
-              <div className="mb-8"><CategoryNav categories={categories} selected={selected} /></div>
-            )}
-
-            {casinos.length === 0 ? (
-              <p className="text-muted">{COPY.casinos.noResults}</p>
-            ) : (
-              <ol className="flex flex-col gap-5">
-                {casinos.map((casino, i) => <CasinoCard key={casino.id} casino={casino} rank={i + 1} />)}
-              </ol>
-            )}
-
-            {activeCategory && hasMoreCasinos && (
-              <div className="mt-9 text-center">
-                <Link href={`/categories/${selected}`} aria-label={`See all ${activeCategory.name} casinos`} className="inline-flex rounded-full border border-line-soft bg-paper px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:border-brand hover:text-brand">
-                  See More →
-                </Link>
-              </div>
-            )}
-          </div>
-        </section>
 
         {/* Special offers */}
         {topOffers.length > 0 && (
