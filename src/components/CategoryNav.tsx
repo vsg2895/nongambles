@@ -18,14 +18,20 @@ export default function CategoryNav({
 }) {
   return (
     /*
-     * ONE FULL-WIDTH COLUMN ON A PHONE, a content-sized wrapping row from
-     * 640px up.
+     * ONE FULL-WIDTH COLUMN ON A PHONE; from 640px up, a grid of EQUAL chips,
+     * every one as wide as the widest label.
      *
-     * Content sizing is right on a desktop, where the chips sit in one row and
-     * their differing widths read as differing words. On a phone the same rule
-     * produced a ragged stack — chips measured 156–187px wide, so some rows
-     * held two and some held one and no two edges lined up, which reads as
-     * unrelated buttons rather than one set of filters.
+     * Content-sized chips (the previous rule) gave every tab a different
+     * width, so "Free Spins" beside "Crypto Oriented" read as unequal buttons
+     * rather than one set of filters. The grid is `w-max`, so its `1fr` tracks
+     * resolve to the widest chip's max-content width and every chip shares it
+     * — no measured pixel value to go stale when a category is renamed. The
+     * column count steps up with the breakpoints (2 / 3 / 4 / 5) so the widest
+     * chip still fits the container at each.
+     *
+     * On a phone the chips stack instead: measured content-sized they came out
+     * 156–187px wide, so some rows held two and some one, and no two edges
+     * lined up.
      *
      * Two equal columns do not fit: the widest chip needs ~187px and a
      * half-width track at 390px is ~166px, so a nowrap label would be pushed
@@ -44,7 +50,7 @@ export default function CategoryNav({
         countClassName="text-xs text-faint"
         actionClassName="text-brand font-semibold"
       >
-      <nav aria-label="Casino categories" className="grid grid-cols-1 gap-2 sm:flex sm:flex-wrap sm:gap-3">
+      <nav aria-label="Casino categories" className="grid grid-cols-1 gap-2 sm:w-max sm:grid-cols-[repeat(2,1fr)] md:grid-cols-[repeat(3,1fr)] lg:grid-cols-[repeat(4,1fr)] xl:grid-cols-[repeat(5,1fr)] sm:gap-3">
       {categories.map((c) => {
         const active = c.slug === selected
         return (
@@ -71,7 +77,7 @@ export default function CategoryNav({
             aria-current={active ? 'page' : undefined}
             // `.pill` / `.pill-active` carry the colours and the hover state,
             // which cannot be expressed inline. min-h-11 keeps a 44px tap target.
-            className={`pill flex w-full justify-center sm:flex sm:w-auto sm:justify-start min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors ${
+            className={`pill flex w-full justify-center whitespace-nowrap min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors ${
               active ? 'pill-active font-semibold' : 'font-medium'
             }`}
           >
