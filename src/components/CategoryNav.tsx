@@ -4,6 +4,14 @@ import { COPY } from '@/constants/copy'
 import MobileCollapse from '@/components/MobileCollapse'
 import type { Category } from '@shared/types/category'
 
+/*
+ * The most chips one row holds — see `oneRow` in the component. Seven chips at
+ * the widest labels measured today need ~1130px in the compact one-row size,
+ * which the narrowest home container (1152px) still holds; past that the grid
+ * keeps wrapping.
+ */
+const MAX_ONE_ROW = 7
+
 /**
  * Viglinksi category selector — pill tabs with a gold active state.
  * Mounted on the home page and on the casinos listing; both link at the
@@ -16,6 +24,15 @@ export default function CategoryNav({
   categories: Category[]
   selected: string
 }) {
+  /*
+   * ONE ROW from 1280px, like winpalack: with at most MAX_ONE_ROW categories
+   * the grid becomes a single flex line whose chips share the width equally
+   * (`flex-1 basis-0`), with slightly tighter padding so seven fit this site's
+   * container. `flex-wrap` is only a safety net: a chip never shrinks below
+   * its label, so a longer label wraps the row instead of overflowing it.
+   */
+  const oneRow = categories.length <= MAX_ONE_ROW
+
   return (
     /*
      * ONE FULL-WIDTH COLUMN ON A PHONE; from 640px up, a grid of EQUAL chips,
@@ -50,7 +67,7 @@ export default function CategoryNav({
         countClassName="text-xs text-faint"
         actionClassName="text-brand font-semibold"
       >
-      <nav aria-label="Casino categories" className="grid grid-cols-1 gap-2 sm:w-max sm:grid-cols-[repeat(2,1fr)] md:grid-cols-[repeat(3,1fr)] lg:grid-cols-[repeat(4,1fr)] xl:grid-cols-[repeat(5,1fr)] sm:gap-3">
+      <nav aria-label="Casino categories" className={`grid grid-cols-1 gap-2 sm:w-max sm:grid-cols-[repeat(2,1fr)] md:grid-cols-[repeat(3,1fr)] lg:grid-cols-[repeat(4,1fr)] xl:grid-cols-[repeat(5,1fr)] sm:gap-3 ${oneRow ? 'xl:flex xl:w-auto xl:flex-wrap xl:gap-2' : ''}`}>
       {categories.map((c) => {
         const active = c.slug === selected
         return (
@@ -77,7 +94,7 @@ export default function CategoryNav({
             aria-current={active ? 'page' : undefined}
             // `.pill` / `.pill-active` carry the colours and the hover state,
             // which cannot be expressed inline. min-h-11 keeps a 44px tap target.
-            className={`pill flex w-full justify-center whitespace-nowrap min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors ${
+            className={`${oneRow ? 'xl:flex-1 xl:basis-0 xl:px-2.5 xl:text-sm' : ''} pill flex w-full justify-center whitespace-nowrap min-h-11 items-center gap-2 rounded-full px-4 py-2 text-sm transition-colors ${
               active ? 'pill-active font-semibold' : 'font-medium'
             }`}
           >
