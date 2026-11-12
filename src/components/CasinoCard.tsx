@@ -4,81 +4,80 @@ import { resolveImageUrl } from '@/lib/images'
 import { COPY } from '@/constants/copy'
 import type { CasinoWithAttachment } from '@shared/types/casino'
 
-function Stars({ rating }: { rating: number }) {
+/** Amber stars; the empty ones in the hairline colour. */
+export function Stars({ rating, className = '' }: { rating: number; className?: string }) {
   return (
-    <span className="inline-flex items-center gap-0.5" role="img" aria-label={`${rating} out of 5`}>
+    <span className={`inline-flex tracking-[1px] ${className}`} role="img" aria-label={`${rating} out of 5`}>
       {Array.from({ length: 5 }, (_, i) => (
-        <span key={i} className={i < rating ? 'text-gold' : 'text-line-soft'} aria-hidden>★</span>
+        <span key={i} className={i < rating ? 'text-amber' : 'text-line-soft'} aria-hidden>★</span>
       ))}
     </span>
   )
 }
 
-// Viglinksi — audit review row: a serif rank numeral, a prominent brand
-// logo, then only the three things that matter (name · rating · bonus) and a
-// clear crimson primary CTA. No rank chip, no category clutter.
-export default function CasinoCard({ casino, rank }: { casino: CasinoWithAttachment; rank?: number }) {
-  // Card shows the casino's "Image" (logo), NOT the wide "Banner Image" (that's
-  // used big on the single casino page). Falls back to the banner if no Image.
-  const image = resolveImageUrl(casino.image_path ?? casino.banner_image)
+/**
+ * The ledger table's column grid — shared by the header row and every row.
+ * Tighter fixed columns at lg (1024px), where the mockup's widths left the
+ * casino name too little room; the mockup's own widths from xl up.
+ */
+export const TABLE_COLS = 'lg:grid-cols-[minmax(0,1.4fr)_96px_minmax(0,1.2fr)_250px] xl:grid-cols-[minmax(0,1.3fr)_110px_minmax(0,1.4fr)_300px]'
 
+/** Column labels over a list of rows. Decorative: each row names its own cells. */
+export function CasinoTableHead() {
   return (
-    <li className="card group flex flex-col gap-4 p-4 transition-colors lg:flex-row lg:items-center lg:gap-6 lg:p-5">
-      {/* Rank numeral + prominent logo */}
-      <div className="flex items-center gap-4 sm:gap-5">
-        {rank != null && (
-          <span
-            className="w-7 shrink-0 text-center font-display text-[26px] leading-none tabular-nums text-brand"
-            aria-label={`Rank ${rank}`}
-          >
-            {rank}
-          </span>
-        )}
-        <div className="flex-shrink-0">
-          {image ? (
-            // Directly-sized image (NO `fill`) → renders at exactly 160×96.
-            <Image
-              src={image}
-              alt={casino.name}
-              width={320}
-              height={192}
-              sizes="160px"
-              className="h-24 w-40 rounded-xl border border-line bg-white ring-1 ring-line"
-              style={{ objectFit: 'contain' }}
-            />
-          ) : (
-            <span className="grid h-24 w-40 place-items-center rounded-xl border border-line bg-cream text-2xl font-bold text-brand" aria-label={casino.name}>
-              {casino.name.charAt(0).toUpperCase()}
-            </span>
+    <div aria-hidden className={`ng-label hidden gap-4 border-b border-line px-4 py-3.5 lg:grid ${TABLE_COLS}`}>
+      <span>Casino</span>
+      <span>Score</span>
+      <span>Headline offer</span>
+      <span className="text-right">Action</span>
+    </div>
+  )
+}
+
+/** A casino's logo on the white tile every logo sits on. */
+export function LogoTile({ casino, className = '' }: { casino: CasinoWithAttachment; className?: string }) {
+  const image = resolveImageUrl(casino.image_path ?? casino.banner_image)
+  return image ? (
+    <Image src={image} alt={casino.name} width={152} height={104} sizes="76px" className={`shrink-0 rounded-lg bg-white object-contain p-1 ${className}`} />
+  ) : (
+    <span className={`grid shrink-0 place-items-center rounded-lg bg-white p-1 text-center text-xs font-bold leading-tight text-cream ${className}`}>
+      {casino.name}
+    </span>
+  )
+}
+
+// Nongambles — one line of the ledger: casino, score, the headline offer and
+// the two actions (Open Casino → affiliate, Full Review → page). The list
+// order is the ranking; no number is printed.
+export default function CasinoCard({ casino }: { casino: CasinoWithAttachment; rank?: number }) {
+  return (
+    <li className={`grid grid-cols-1 items-center gap-x-3.5 gap-y-2.5 border-b border-line p-4 transition-colors hover:bg-ground-2 lg:gap-4 ${TABLE_COLS}`}>
+      <div className="flex min-w-0 items-center gap-3.5">
+        <LogoTile casino={casino} className="h-[52px] w-[76px]" />
+        <div className="min-w-0">
+          <h3 className="break-words font-display text-[22px] leading-[1.1] text-ink">{casino.name}</h3>
+          {casino.categories && casino.categories.length > 0 && (
+            <p className="mt-0.5 truncate font-mono text-[11px] uppercase tracking-[0.06em] text-mute">{casino.categories[0].name}</p>
           )}
         </div>
       </div>
-
-      {/* The three things that matter */}
-      <div className="min-w-0 flex-1">
-        <h3 className="font-display text-[20px] leading-snug text-ink">{casino.name}</h3>
-        <div className="mt-1.5 flex items-center gap-2">
-          <Stars rating={casino.rating} />
-          <span className="text-sm font-semibold text-muted">{casino.rating.toFixed(1)}</span>
-        </div>
-        {casino.bonuses && (
-          <p className="mt-2 line-clamp-2 text-[15px] font-semibold text-brand">{casino.bonuses}</p>
-        )}
+      <div className="flex items-center gap-2 font-mono text-sm lg:block">
+        <b className="text-xl font-medium text-ink lg:block">{casino.rating.toFixed(1)}</b>
+        <Stars rating={casino.rating} />
       </div>
-
-      {/* CTAs — Visit is primary, Read Review secondary */}
-      <div className="flex w-full flex-col gap-2.5 sm:w-auto sm:flex-shrink-0">
+      <p className="text-[15px] font-semibold text-mint">{casino.bonuses ?? '—'}</p>
+      <div className="flex gap-2 lg:justify-end">
         <a
           href={casino.attachment.affiliate_url}
           target="_blank"
           rel="nofollow sponsored noopener"
-          className="btn-primary flex min-h-11 items-center justify-center rounded-full px-7 py-3 text-center text-sm font-semibold lg:min-w-[150px]"
+          className="inline-flex min-h-[42px] flex-1 items-center justify-center whitespace-nowrap rounded-[10px] bg-mint px-3 sm:px-4 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand-soft sm:flex-none"
         >
           {COPY.casinos.visitCasino}
         </a>
         <Link
           href={`/casinos/${casino.slug}`}
-          className="inline-flex min-h-11 items-center justify-center rounded-xl border border-line-soft bg-paper px-8 py-2.5 text-center text-sm font-bold text-ink transition-colors hover:border-brand hover:text-brand"
+          className="inline-flex min-h-[42px] flex-1 items-center justify-center whitespace-nowrap rounded-[10px] border border-line-soft px-3 sm:px-4 text-sm font-semibold text-ink transition-colors hover:border-mint sm:flex-none"
         >
           {COPY.casinos.readReview}
         </Link>

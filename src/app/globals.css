@@ -42,13 +42,24 @@
 
   /* Teal accent. `brand-ink` is the text colour that goes ON the accent —
      near-black, because white on #4FD9C4 fails contrast badly. */
-  --color-brand: #4fd9c4;
-  --color-brand-dark: #3bc8c2;
-  --color-brand-soft: #76f1c1;
-  --color-brand-ink: #04140f;
+  --color-brand: #4fd8b6;
+  --color-brand-dark: #2fb894;
+  --color-brand-soft: #7ce6cb;
+  --color-brand-ink: #06231b;
 
-  --color-line: #22383a;
-  --color-line-soft: #2e4d50;
+  --color-line: #21363a;
+  --color-line-soft: #2c4549;
+
+  /* Ledger redesign (sites/nongambles-redesign.html): mint = money that
+     survives the math, amber = what it costs, rose = the 18+ mark. */
+  --color-ground-2: #101c20;
+  --color-panel: #13221f;
+  --color-fg-2: #a9bdb4;
+  --color-mute: #7f948c;
+  --color-mint: #4fd8b6;
+  --color-amber: #f2b45a;
+  --color-rose: #f0857a;
+  --color-night: #081012;
 
   --color-gold: #e9e3c9;
   --color-win: #76f1c1;
@@ -61,7 +72,7 @@
 
   --font-sans: var(--font-work-sans);
   --font-display: var(--font-dm-serif);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-jetbrains), ui-monospace, Menlo, monospace;
 
   --radius-ng: 16px;
 }
@@ -138,6 +149,30 @@ body {
   background:
     radial-gradient(60% 70% at 50% -10%, rgba(79, 217, 196, 0.1) 0%, rgba(79, 217, 196, 0) 62%),
     linear-gradient(180deg, #0c1518 0%, #101d20 55%, #0c1518 100%);
+}
+
+/* ── Ledger pieces ──────────────────────────────────────────────────────── */
+/* Hero ground: a 48px hairline grid, faded out toward the copy. */
+.ng-grid {
+  background:
+    linear-gradient(var(--color-line) 1px, transparent 1px) 0 0 / 100% 48px,
+    linear-gradient(90deg, var(--color-line) 1px, transparent 1px) 0 0 / 48px 100%;
+  background-color: var(--color-cream);
+}
+.ng-grid > div {
+  background: radial-gradient(ellipse at 30% 40%, rgba(12, 21, 24, 0.55), #0c1518 75%);
+}
+/* Mono eyebrow / column label. */
+.ng-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+}
+:focus-visible {
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
 }
 
 /* ── Responsive safety net (all phones / tablets / laptops / large screens) ── */

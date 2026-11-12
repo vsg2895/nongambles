@@ -63,9 +63,9 @@ export default async function CategoriesPage() {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdScript(graph) }} />
       <main className="py-6 px-4 sm:py-12">
-      <div className="container mx-auto max-w-5xl">
+      <div className="mx-auto max-w-[1200px]">
         <header className="mb-4 sm:mb-8">
-          <h1 className="text-2xl font-bold sm:text-3xl text-ink">{COPY.categories.pageTitle}</h1>
+          <h1 className="font-display text-[32px] text-ink sm:text-[46px]">{COPY.categories.pageTitle}</h1>
           <p className="mt-1 text-sm text-muted sm:mt-2 sm:text-base">{COPY.categories.pageDescription}</p>
         </header>
         {categories.length === 0 ? (
