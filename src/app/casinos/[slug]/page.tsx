@@ -220,16 +220,18 @@ export default async function CasinoDetailPage({ params }: Props) {
           </div>
         )}
 
-        {/* Identity on the left, the headline offer and the CTA on the right. */}
+        {/* Identity on the left, the headline offer and the CTA on the right. Below
+            416px the logo sits ABOVE the name: beside it, a one-word name like
+            "Luckydreams" would break mid-word at this size. */}
         <header className="mt-[22px] flex flex-wrap items-end justify-between gap-6 border-b border-line pb-7">
-          <div className="flex min-w-0 flex-[1_1_360px] items-center gap-[18px]">
+          <div className="flex min-w-0 flex-[1_1_360px] items-center gap-[18px] max-[26rem]:flex-col max-[26rem]:items-start">
             {logo ? (
               <Image src={logo} alt={`${casino.name} logo`} width={208} height={144} sizes="104px" className="h-[72px] w-[104px] shrink-0 rounded-lg bg-white object-contain p-1.5" />
             ) : (
               <span className="grid h-[72px] w-[104px] shrink-0 place-items-center rounded-lg bg-white p-1.5 text-center font-bold text-cream">{casino.name}</span>
             )}
             <div className="min-w-0">
-              <h1 className="font-display text-[36px] leading-none text-ink sm:text-[58px]">{casino.name}</h1>
+              <h1 className="font-display text-[36px] leading-none text-ink [overflow-wrap:anywhere] sm:text-[58px]">{casino.name}</h1>
               <div className="mt-2 flex items-center gap-2.5">
                 <Stars rating={casino.rating} />
                 <span className="font-mono text-fg-2">{casino.rating.toFixed(1)}</span>

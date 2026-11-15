@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { resolveImageUrl } from '@/lib/images'
 import { COPY } from '@/constants/copy'
 import type { BonusSection } from '@/lib/api'
 
@@ -32,7 +33,14 @@ export default function BonusCategoryNav({ sections }: { sections: BonusSection[
               href={`/bonuses/${section.slug}`}
               className="flex h-full flex-col gap-[18px] bg-ground-2 px-[18px] py-[22px] text-ink transition-colors hover:bg-panel"
             >
-              <span className="font-mono text-[34px] leading-none text-mint">{section.offers_count}</span>
+              <span className="flex items-center justify-between gap-3">
+                <span className="font-mono text-[34px] leading-none text-mint">{section.offers_count}</span>
+                {/* The type's own icon, as in the Bonus menu. A plain <img>: next/image
+                    refuses SVG. alt="" because the label names it. */}
+                {section.icon_path && (
+                  <img src={resolveImageUrl(section.icon_path)!} alt="" width={28} height={28} className="h-7 w-7 shrink-0" />
+                )}
+              </span>
               <span className="font-semibold">{section.name}</span>
             </Link>
           </li>
